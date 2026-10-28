@@ -18,7 +18,9 @@ Codex inspected the starter models, collection service, tests, and the six revie
 
 ## Comment 3 — Missing test
 
-Pending.
+**What I did:** Created `tests/test_watchlist.py` using `test_add_to_collection_nonexistent_film_raises` as the model. The fixtures create an isolated in-memory app and persisted sample user, then the test passes an absent all-zero UUID inside an app context and asserts `pytest.raises(FilmNotFoundError)`. It also checks that no watchlist row was created.
+
+**How I verified:** Ran `python -m pytest tests/test_watchlist.py -v` and `python -m pytest tests/ -v`; both passed (one watchlist test and five total at this milestone).
 
 ## Comment 4 — Default visibility
 
