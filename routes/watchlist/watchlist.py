@@ -6,7 +6,8 @@ Endpoints for the watchlist feature.
 
 from flask import Blueprint, jsonify, request
 from services.watchlist_service import (
-    add_to_watchlist, get_watchlist, remove_from_watchlist, NotInWatchlistError,
+    add_to_watchlist, get_watchlist, remove_from_watchlist,
+    AlreadyInWatchlistError, NotInWatchlistError,
 )
 from services.collection_service import FilmNotFoundError
 
@@ -36,7 +37,12 @@ def add_film(user_id):
     if not isinstance(public, bool):
         return jsonify({"error": "public must be a JSON boolean"}), 400
 
-    entry = add_to_watchlist(user_id=user_id, film_id=data["film_id"], public=public)
+    try:
+        entry = add_to_watchlist(user_id=user_id, film_id=data["film_id"], public=public)
+    except FilmNotFoundError as error:
+        return jsonify({"error": str(error)}), 404
+    except AlreadyInWatchlistError as error:
+        return jsonify({"error": str(error)}), 409
     return jsonify(entry.to_dict()), 201
 
 
