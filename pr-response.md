@@ -6,6 +6,8 @@ Brian directed Codex to prepare and submit this project through his GitHub accou
 
 Brian explicitly chose **public by default** and **date-added sorting**, explaining that time is more relevant and asking Codex to challenge that choice if alphabetical ordering was preferable. Codex raised known-title lookup and older-item visibility as counterarguments and expanded the written tradeoff explanations below. The decisions and recency rationale came from Brian; the detailed prose and public-default rationale were AI-assisted. No user research or measured preference is claimed. Codex also reviewed the commit messages against the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) and the repository's `CONTRIBUTING.md`.
 
+The earlier session ended before submission, so Claude Code finished the final steps: it re-ran the test suite (17 passed), rendered the `git log --oneline` screenshot below, committed it, pushed the rebased branch, and opened the pull request.
+
 ## Comment 1 — Rename
 
 **What I did:** Renamed `save_to_watchlist()` to `add_to_watchlist()` in `services/watchlist_service.py`. Updated both the import and the endpoint call in `routes/watchlist/watchlist.py`, following the `add_to_collection()` naming pattern.
