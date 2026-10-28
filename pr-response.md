@@ -12,7 +12,9 @@ Codex inspected the starter models, collection service, tests, and the six revie
 
 ## Comment 2 — Deduplication
 
-Pending.
+**What I did:** Followed `add_to_collection()` in `services/collection_service.py`: after checking that the film exists, query for an existing entry matching both `user_id` and `film_id` with `filter_by(...).first()`. The collection service raises `AlreadyInCollectionError` on a match; the watchlist now raises `AlreadyInWatchlistError` before inserting or committing. Including both IDs keeps separate users' lists independent.
+
+**How I verified:** The added duplicate regression test will check that the second add raises the domain error and exactly one row remains; a separate edge case will cover different users saving the same film. Full-suite results are recorded below after execution.
 
 ## Comment 3 — Missing test
 
