@@ -40,7 +40,11 @@ Codex inspected the starter models, collection service, tests, and the six revie
 
 ## Comment 6 — Rebase
 
-Pending.
+**What conflicted:** `git rebase origin/main` stopped while replaying the original feature commit in `models.py`. Main defined `WatchlistEntry.film_id` as `db.String(36)`, while the feature branch still defined an indexed `db.Integer` foreign key.
+
+**How I resolved it:** Kept main's UUID-compatible `db.String(36)` foreign key and continued the rebase. A separate UUID fix commit restores the feature's index while preserving the UUID type and updates the service and route documentation to use film UUIDs. No integer conversion is applied to incoming IDs.
+
+**How I verified no conflict remains:** Run the final suite with generated film UUIDs, check for conflict markers and merge commits, and confirm `origin/main` is an ancestor of the completed feature branch. Results are recorded in the final verification section.
 
 ## PR Description
 
